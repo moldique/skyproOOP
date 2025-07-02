@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "skyprooop"
+version = "0.1.0"
+description = ""
+authors = ["Sergunin Vitaliy <sergunin_v@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+flake8 = "^7.3.0"
+black = "^25.1.0"
+mypy = "^1.16.1"
+pytest = "^8.4.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+disallow_untyped_defs = true
+no_implicit_optional = true
+warn_return_any = true
+exclude = 'venv'
+
+[tool.black]
+# Максимальная длина строки
+line-length = 119
+exclude = 'venv'
+
+[tool.isort]
+# максимальная длина строки
+line_length = 119
+exclude = 'venv'
+

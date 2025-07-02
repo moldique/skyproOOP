@@ -22,3 +22,4 @@ https://github.com/moldique/skyproOOP
 - tests_main
 
 2. Функциональный код покрыт тестами на 100%
+

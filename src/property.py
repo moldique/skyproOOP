@@ -50,7 +50,10 @@ class Category:
         ]
 
     def add_product(self, products: Product):
-        self.__products.append(products)
+        if isinstance(products, Product):
+            self.__products.append(products)
+        else:
+            print("Не является обьектом класса")
 
     @property
     def list_products(self):

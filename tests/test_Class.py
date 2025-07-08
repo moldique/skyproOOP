@@ -19,7 +19,7 @@ def category_smart() -> Category:
     return Category(
         "Смартфоны",
         "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
-        [products_iphone(), products_Xiaomi()],
+        [products_iphone, products_Xiaomi],
     )
 
 
@@ -39,22 +39,62 @@ def test_products2(products_Xiaomi: Product) -> None:
 
 def test_category(category_smart: Category) -> None:
     assert category_smart.name == "Смартфоны"
-    assert (
-        category_smart.description
-        == "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни"
-    )
     assert category_smart.products == [products_iphone, products_Xiaomi]
-    assert Category(
-        "Смартфоны",
-        "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
-        [products_iphone(), products_Xiaomi()],
-    )
+    assert len(category_smart.products) == 2
 
 
 def test_count(category_smart: Category) -> None:
-    assert category_smart.category_count == 1
-    assert category_smart.product_count == 2
+    Category.category_count = 0
+    Category.product_count = 0
 
-    cat_1 = Category("1111", "1111", [products_Xiaomi()])
-    assert category_smart.category_count == 2
-    assert category_smart.product_count == 3
+    cat_1 = Category("1111", "1111", [products_iphone])
+    assert cat_1.name == "1111"
+    assert Category.category_count == 1
+    assert Category.product_count == 1
+
+
+@pytest.fixture()
+def product_empty() -> Product:
+    return Product("", "", 0.0, 0)
+
+
+def test_create_product_with_empty_fields(product_empty: Product):
+    assert product_empty.name == ""
+    assert product_empty.description == ""
+    assert product_empty.price == 0.0
+    assert product_empty.quantity == 0
+
+
+def test_category_with_no_products():
+    Category.category_count = 0
+    Category.product_count = 0
+
+    empty_category = Category("Пустая категория", "Без товаров", [])
+    assert empty_category.name == "Пустая категория"
+    assert empty_category.description == "Без товаров"
+    assert empty_category.products == []
+    assert Category.category_count == 1
+    assert Category.product_count == 0
+
+
+def test_category_multiple_creations(products_iphone: Product, products_Xiaomi: Product):
+    Category.category_count = 0
+    Category.product_count = 0
+
+    c1 = Category("Категория1", "Описание1", [products_iphone])
+    c2 = Category("Категория2", "Описание2", [products_Xiaomi])
+    assert c1.name == "Категория1"
+    assert c2.name == "Категория2"
+    assert Category.category_count == 2
+    assert Category.product_count == 2
+
+
+def test_category_product_count_accumulates(products_iphone: Product, products_Xiaomi: Product):
+    Category.category_count = 0
+    Category.product_count = 0
+
+    Category("Категория1", "Описание1", [products_iphone])
+    Category("Категория2", "Описание2", [products_iphone, products_Xiaomi])
+
+    assert Category.category_count == 2
+    assert Category.product_count == 3

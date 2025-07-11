@@ -12,7 +12,7 @@ https://github.com/moldique/skyproOOP
 ```
 
 
-## В коде представлена создание двух классов, в двух модулях Class и propetry
+## В коде представлена создание двух классов, в двух модулях Class и propetry с использованием магических методов 
 - Category
 - Products
 
@@ -22,4 +22,4 @@ https://github.com/moldique/skyproOOP
 - tests_Class
 - test_property
 
-2. Функциональный код покрыт тестами на 78%
+2. Функциональный код покрыт тестами на 83%

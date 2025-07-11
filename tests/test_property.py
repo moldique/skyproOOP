@@ -61,3 +61,34 @@ def test_category_list_products():
     assert "Чехол" in output
     assert "500.0 руб." in output
     assert "Остаток: 50 шт." in output
+
+def test_product_addition():
+    p1 = Product("Телефон", "Смартфон", 30000.0, 2)
+    p2 = Product("Ноутбук", "Игровой", 80000.0, 1)
+    total = p1 + p2
+    assert total == 140000
+
+
+def test_product_addition_with_different_quantities():
+    p1 = Product("Мышка", "Беспроводная", 2000.0, 3)
+    p2 = Product("Клавиатура", "Механическая", 5000.0, 2)
+    total = p1 + p2
+    assert total == 16000
+
+
+def test_category_str_method():
+    p1 = Product("Чехол", "Силиконовый", 500.0, 10)
+    p2 = Product("Пленка", "Защитная", 300.0, 20)
+    category = Category("Аксессуары", "Для телефонов", [p1, p2])
+    assert str(category) == "Аксессуары, количество продуктов: 30 шт."
+
+
+def test_category_str_method_with_empty_products():
+    category = Category("Пустая", "Категория без продуктов", [])
+    assert str(category) == "Пустая, количество продуктов: 0 шт."
+
+
+def test_category_str_method_with_single_product():
+    p = Product("Кабель", "USB-C", 1000.0, 5)
+    category = Category("Кабели", "Разные кабели", [p])
+    assert str(category) == "Кабели, количество продуктов: 5 шт."

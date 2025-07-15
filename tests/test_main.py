@@ -174,3 +174,8 @@ def test_category_with_different_product_types():
     assert "Redmi Note 10" in category.list_products
     assert "Shade Grass" in category.list_products
     assert str(category) == "Разное, количество продуктов: 48 шт."
+
+
+def test_product_repr():
+    product = Product("Телевизор", "4K UHD", 50000.0, 7)
+    assert repr(product) == "Телевизор, 4K UHD, 50000.0, 7"

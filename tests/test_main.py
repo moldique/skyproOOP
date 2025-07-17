@@ -179,3 +179,13 @@ def test_category_with_different_product_types():
 def test_product_repr():
     product = Product("Телевизор", "4K UHD", 50000.0, 7)
     assert repr(product) == "Телевизор, 4K UHD, 50000.0, 7"
+
+
+def test_ValueError():
+    product_invalid = Product("Бракованный товар", "Неверное количество", 1000.0, 3)
+    assert product_invalid.quantity == 3
+
+
+def test_middle_price():
+    cat_1 = Category("Пустая категория", "Категория без продуктов", [])
+    assert cat_1.middle_price() == 0
